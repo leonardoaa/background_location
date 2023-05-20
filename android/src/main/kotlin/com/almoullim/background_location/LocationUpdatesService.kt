@@ -34,12 +34,12 @@ class LocationUpdatesService : Service() {
 
     private val mBinder = LocalBinder()
     private var mNotificationManager: NotificationManager? = null
-    private var mLocationRequest: LocationRequest? = null
+    private var mLocationRequest: LocationRequest = null
     private var mFusedLocationClient: FusedLocationProviderClient? = null
     private var mLocationManager: LocationManager? = null
     private var mFusedLocationCallback: LocationCallback? = null
     private var mLocationManagerCallback: LocationListener? = null
-    private var mLocation: Location? = null
+    private var mLocation: Location = null
     private var isGoogleApiAvailable: Boolean = false
     private var isStarted: Boolean = false
 
@@ -108,7 +108,7 @@ class LocationUpdatesService : Service() {
             mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
             
             mFusedLocationCallback = object : LocationCallback() {
-                override fun onLocationResult(locationResult: LocationResult?) {
+                override fun onLocationResult(locationResult: LocationResult) {
                     super.onLocationResult(locationResult)
                     onNewLocation(locationResult!!.lastLocation)
                 }
